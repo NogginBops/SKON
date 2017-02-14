@@ -2,11 +2,19 @@ grammar SKON;
 
 // The root of a file is already a map so no need for the brackets
 skon
-   : meta* open_map
+   : meta_version meta_docver meta_skema? open_map
    ;
 
-meta
-    : METADELIMIT KEY DEFINE simple_value METADELIMIT
+meta_version
+    : METADELIMIT VERSION COLON INTEGER METADELIMIT
+    ;
+
+meta_docver
+    : METADELIMIT DOCVER COLON STRING METADELIMIT
+    ;
+
+meta_skema
+    : METADELIMIT SKEMA COLON STRING METADELIMIT
     ;
 
 // A map without the surrounding '{' '}'
@@ -22,7 +30,7 @@ map
 
 // A pair that expects a key, a ':' and a value.
 pair
-   : KEY DEFINE value
+   : KEY COLON value
    ;
 
 // A array without the surrounding '[' ']'
@@ -54,10 +62,8 @@ value
    | complex_value
    ;
 
-// A '@' followed by a unix timestamp
 DATETIME
-    : '@' (INTNOZERO 
-    | YEAR '-' MONTH '-' DAY 
+    : YEAR '-' MONTH '-' DAY 
     | HOUR ':' MINUTE ':' SECOND ZULU 
     | HOUR ':' MINUTE ':' SECOND '.' DIGIT* ZULU
     | HOUR ':' MINUTE ':' SECOND ('+'|'-') HOUR ':' MINUTE
@@ -65,12 +71,16 @@ DATETIME
     | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND ZULU 
     | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND '.' DIGIT* ZULU
     | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND ('+'|'-') HOUR ':' MINUTE
-    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND '.' DIGIT* ('+'|'-') HOUR ':' MINUTE)
+    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND '.' DIGIT* ('+'|'-') HOUR ':' MINUTE
     ;
 
 // True and false is before to get mached before KEY
 TRUE: 'true';
 FALSE: 'false';
+
+VERSION: 'Version';
+DOCVER: 'DocumentVersion';
+SKEMA: 'SKEMA';
 
 METADELIMIT
     : '~'
@@ -97,7 +107,7 @@ CLOSE_ARRAY: ']';
 SEPARATOR: ',';
 
 // Key-value separator
-DEFINE: ':';
+COLON: ':';
 
 // Any string contained in '"' with support for escaping
 STRING

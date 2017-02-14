@@ -7,16 +7,15 @@
 grammar SKEMA;
 
 skema
-    : meta* (entry SEPARATOR)*
+    : meta_version meta_docver (entry SEPARATOR)*
     ;
 
-meta
-    : METADELIMIT KEY COLON simple_value METADELIMIT
+meta_version
+    : METADELIMIT VERSION COLON INTEGER_VAL METADELIMIT
     ;
 
-// Any simple value, ie terminals
-simple_value
-    : (STRING_VAL | DATETIME_VAL | INTEGER_VAL | FLOAT_VAL | TRUE | FALSE)
+meta_docver
+    : METADELIMIT DOCVER COLON STRING_VAL METADELIMIT
     ;
 
 entry
@@ -63,6 +62,9 @@ REF: '#'[a-zA-Z]CHAR*;
 DEF: 'define';
 OPT: 'optional';
 
+VERSION: 'Version';
+DOCVER: 'DocumentVersion';
+
 METADELIMIT
     : '~'
     ;
@@ -74,22 +76,7 @@ STRING_VAL
 
 // The different escape characters
 fragment ESC
-   : '\\' (["\\/bfnrt] | UNICODE)
-   ;
-
-// The unicode escape
-fragment UNICODE
-   : 'u' HEX HEX HEX HEX
-   ;
-
-// Any hex number
-fragment HEX
-   : [0-9a-fA-F]
-   ;
-
-// Any FLOAT number
-FLOAT_VAL
-   : '-'? INT '.' [0-9] + EXP? | '-'? INT EXP | '-'? INT
+   : '\\' (["\\/bfnrt])
    ;
 
 // Any Integer value
@@ -106,25 +93,6 @@ fragment INT
 fragment INTNOZERO
    : [1-9] [0-9]*
    ;
-
-// FLOAT exponent part
-fragment EXP
-   : [Ee] [+\-]? INT
-   ;
-
-// A '@' followed by a unix timestamp
-DATETIME_VAL
-    : '@' (INTNOZERO 
-    | YEAR '-' MONTH '-' DAY 
-    | HOUR ':' MINUTE ':' SECOND ZULU 
-    | HOUR ':' MINUTE ':' SECOND '.' DIGIT* ZULU
-    | HOUR ':' MINUTE ':' SECOND ('+'|'-') HOUR ':' MINUTE
-    | HOUR ':' MINUTE ':' SECOND '.' DIGIT* ('+'|'-') HOUR ':' MINUTE
-    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND ZULU 
-    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND '.' DIGIT* ZULU
-    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND ('+'|'-') HOUR ':' MINUTE
-    | YEAR '-' MONTH '-' DAY 'T' HOUR ':' MINUTE ':' SECOND '.' DIGIT* ('+'|'-') HOUR ':' MINUTE)
-    ;
 
 // Open and closing brackets for maps
 OPEN_MAP: '{';
@@ -160,39 +128,6 @@ KEY
 fragment CHAR
     : [a-zA-Z0-9_]
     ;
-
-fragment YEAR
-    : DIGIT DIGIT DIGIT DIGIT
-    ;
-
-fragment MONTH
-    : DIGIT DIGIT
-    ;
-
-fragment DAY
-    : DIGIT DIGIT
-    ;
-
-fragment HOUR
-    : DIGIT DIGIT
-    ;
-
-fragment MINUTE
-    : DIGIT DIGIT
-    ;
-
-fragment SECOND
-    : DIGIT DIGIT
-    ;
-
-fragment ZULU
-   : [Zz]
-   ;
-
-// A single Integer digit
-fragment DIGIT
-   : [0-9]
-   ;
 
 // Single line comments
 COMMENT
