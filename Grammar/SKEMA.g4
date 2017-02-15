@@ -57,7 +57,7 @@ type_def
 TRUE: 'true';
 FALSE: 'false';
 
-REF: '#'[a-zA-Z]CHAR*;
+REF: '#' IDENTCH (IDENTCH | '-')*;
 
 DEF: 'define';
 OPT: 'optional';
@@ -121,12 +121,11 @@ BOOLEAN: 'Boolean';
 DATETIME: 'DateTime';
 
 KEY
-    : [a-zA-Z]CHAR*
+    : IDENTCH (IDENTCH | '-')*
     ;
 
-// Any character
-fragment CHAR
-    : [a-zA-Z0-9_]
+fragment IDENTCH
+    : [^-{}[]"., :]
     ;
 
 // Single line comments
