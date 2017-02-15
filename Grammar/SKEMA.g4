@@ -66,7 +66,7 @@ VERSION: 'Version';
 DOCVER: 'DocumentVersion';
 
 METADELIMIT
-    : '~'
+    : '-'
     ;
 
 // Any string contained in '"' with support for escaping

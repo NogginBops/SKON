@@ -1,9 +1,9 @@
 // This is a example file showing different ways to use SKON.
 
 // This is header data. It defines SKON version and other data like SKEMA location or DocumentVersion
-~Version: 1~
+-Version: 1-
 // This is the version of this document.
-~DocumentVersion: "0.1 - Octopus"~
+-DocumentVersion: "0.1 - Octopus"-
 
 /*
     Comments can be used in single line '//',

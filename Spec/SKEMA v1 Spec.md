@@ -58,7 +58,7 @@ SKEMA uses the same metadata format as SKON, seen [here](./SKON%20v1%20Spec.md#m
 
 All metadata **needs** to be at the top of a SKEMA file.
 
-Metadata entries are surrounded by `~` chracters on both sides and contain a key-value pair.
+Metadata entries are surrounded by `-` chracters on both sides and contain a key-value pair.
 
 There are two metadata directives that are always mandatory.
 Those are as follows:
@@ -73,8 +73,8 @@ A parser **could** support custom metadata, but to keep compatability it **shoul
 This is an example of a valid metadata header for a SKEMA file.
 
 ```c
-~Version: 1~
-~DocumentVersion: "1.1"~
+-Version: 1-
+-DocumentVersion: "1.1"-
 
 // SKON data...
 ```

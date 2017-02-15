@@ -83,7 +83,7 @@ DOCVER: 'DocumentVersion';
 SKEMA: 'SKEMA';
 
 METADELIMIT
-    : '~'
+    : '-'
     ;
 
 KEY

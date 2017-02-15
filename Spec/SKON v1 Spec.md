@@ -135,7 +135,7 @@ Metadata in SKON provide the parser and user with various information about the 
 
 All metadata **needs** to be at the top of a SKON file.
 
-Metadata entries are surrounded by `~` chracters on both sides and contain a key-value pair.
+Metadata entries are surrounded by `-` chracters on both sides and contain a key-value pair.
 
 There are two metadata directives a parser **needs** to support. 
 These are as follows:
@@ -154,9 +154,9 @@ A parser **could** support custom metadata, but to keep compatability it **shoul
 This is an example of a valid metadata header for a SKON file.
 
 ```c
-~Version: 1~
-~DocumentVersion: "1.1"~
-~SKEMA: "./DocumentSKEMA.skema"~
+-Version: 1-
+-DocumentVersion: "1.1"-
+-SKEMA: "./DocumentSKEMA.skema"-
 
 // SKON data...
 ```
@@ -291,8 +291,10 @@ Arrays are written as a list of values all followed by a comma surrounded by two
 
 Maps are a written as a collection of key-value pairs, all followed by a comma and surrounded by two `{` `}` braces.
 
-Keys are written as any characters exluding `{`, `}`, `[`, `]`, `"`, `.` and `,` ending in a `:`. So UTF-8 character are valid keys.
+Keys are written as any characters not beginning with a `-` and exluding `{`, `}`, `[`, `]`, `"`, `.`, `(space)` and `,` ending in a `:`. So UTF-8 character are valid keys.
 Keys must have a length of atleast one character.
+
+The `-` character is not allowed in the beginning of keys because metadata directives starts this way.
 
 #### Examples
 
@@ -340,8 +342,8 @@ To store the data in the previous example as a valid SKON file you could either 
 Or preferably write every element as a key-value pair without the surrounding map.
 
 ```c
-~Version: 1~
-~DocumentVersion: ""~
+-Version: 1-
+-DocumentVersion: ""-
 
 KeyToString: "String value",
 KeyToInt: 1,
