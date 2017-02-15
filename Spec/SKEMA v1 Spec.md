@@ -130,6 +130,8 @@ A map is a complex type in SKEMA that describes a SKON map, what keys and type o
 
 A map is written as Key-Value pairs where the key represents the expected SKON key and the value is a data type.
 
+SKEMA keys are written with the same rules as SKON.
+
 The data type is not restricted to [Type](#type) and can contain other Maps and [Arrays](#arrays) too.
 
 #### Examples
