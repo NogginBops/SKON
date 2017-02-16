@@ -24,7 +24,8 @@ The following is an example showing the syntax of the language:
 //SKON supports comments!
 /* and multiline ones too! :D */
 
-~Version: 1~ // This is the SKON version header.
+-Version: 1- // This is the SKON version header.
+-DocumentVersion: "1.0"- // The version of this document
 
 // Every SKON file is considered a map so everything is stored in key-value pairs.
 
@@ -58,7 +59,7 @@ MapKey: {
 The schema language for SKON is called SKEMA. The following is an example of a SKEMA file and a maching SKON file.
 
 ```scala
-~Version: 1~
+-Version: 1-
 
 // SKEMA also supports comments!
 
@@ -77,8 +78,8 @@ Colors: [ #Color ],
 A quick SKON file that is valid for this SKEMA could look like this:
 
 ```c
-~Version: 1~
-~SKEMA: "./Colors.skema"~
+-Version: 1-
+-SKEMA: "./Colors.skema"-
 
 Colors:
 [
