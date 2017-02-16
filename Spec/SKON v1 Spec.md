@@ -291,7 +291,7 @@ Arrays are written as a list of values all followed by a comma surrounded by two
 
 Maps are a written as a collection of key-value pairs, all followed by a comma and surrounded by two `{` `}` braces.
 
-Keys are written as any characters not beginning with a `-` and exluding `{`, `}`, `[`, `]`, `"`, `.`, '#', `(space)` and `,` ending in a `:`. So UTF-8 character are valid keys.
+Keys are written as any characters not beginning with a number or `-` and exluding `{`, `}`, `[`, `]`, `"`, `.`, '#', `(space)` and `,` ending in a `:`. So UTF-8 character are valid keys.
 Keys must have a length of atleast one character.
 
 The `-` character is not allowed in the beginning of keys because metadata directives starts this way.

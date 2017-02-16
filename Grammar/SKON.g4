@@ -87,7 +87,15 @@ METADELIMIT
     ;
 
 KEY
-    : [a-zA-Z]CHAR*
+    : IDENTCH_NO_NUM (IDENTCH | '-')*
+    ;
+
+fragment IDENTCH
+    :   (IDENTCH_NO_NUM | [0-9])
+    ;
+
+fragment IDENTCH_NO_NUM
+    : ~[\-\{\}\[\]\"\.\,\:\\\r\\\n\# 0-9]
     ;
 
 // Any character
